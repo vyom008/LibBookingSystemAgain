@@ -1,0 +1,126 @@
+﻿@model LibBooking.Models.RoomReservationViewModel
+
+@{
+    ViewData["Title"] = "Library Room Reservation";
+}
+
+<h1>Library Room Reservation</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>@Model.Date.ToString("dddd, dd MMMM yyyy")</h2>
+            <input type="date" id="datePicker" value="@Model.Date.ToString("yyyy-MM-dd")" class="form-control" />
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Room</th>
+                        @for (var hour = 8; hour < 18; hour++)
+                        {
+                            <th>@hour:00</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+@foreach (var room in Model.Rooms)
+{
+    <tr>
+        <td data-room-name="@room.RoomName">@room.RoomName<br /><small>@room.Description</small></td>
+        @for (var hour = 8; hour < 18; hour++)
+        {
+            var reservation = Model.Reservations.FirstOrDefault(r => r.RoomID == room.ID && r.StartTime.Hours == hour);
+            if (reservation != null)
+            {
+                <td class="reserved" title="Reserved"></td>
+            }
+            else
+            {
+                <td class="available" data-room-id="@room.ID" data-hour="@hour"></td>
+            }
+        }
+    </tr>
+}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <button id="submitBtn" class="btn btn-primary">Submit Time</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('datePicker').addEventListener('change', function () {
+            var selectedDate = this.value;
+            window.location.href = '@Url.Action("Index", "Home")?date=' + selectedDate;
+        });
+
+        document.querySelectorAll('.available').forEach(cell => {
+            cell.addEventListener('click', function () {
+                document.querySelectorAll('.available').forEach(c => c.classList.remove('selected'));
+                if (!this.classList.contains('selected')) {
+                    this.classList.add('selected');
+                }
+            });
+        });
+
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            var selectedCell = document.querySelector('.available.selected');
+            if (selectedCell) {
+                var selectedTime = selectedCell.getAttribute('data-hour');
+                var selectedRoomId = selectedCell.getAttribute('data-room-id');
+                var selectedRoomName = selectedCell.parentNode.querySelector('td[data-room-name]').getAttribute('data-room-name');
+
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = '@Url.Action("SubmitTime", "Home")';
+
+                var roomInput = document.createElement('input');
+                roomInput.type = 'hidden';
+                roomInput.name = 'room';
+                roomInput.value = selectedRoomName;
+                form.appendChild(roomInput);
+
+                var idInput = document.createElement('input');
+                idInput.type = 'hidden';
+                idInput.name = 'id';
+                idInput.value = selectedRoomId;
+                form.appendChild(idInput);
+
+                var timeInput = document.createElement('input');
+                timeInput.type = 'hidden';
+                timeInput.name = 'time';
+                timeInput.value = selectedTime;
+                form.appendChild(timeInput);
+
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                alert('Please select a time slot.');
+            }
+        });
+    </script>
+    <style>
+        .available {
+            background-color: green !important;
+            cursor: pointer;
+        }
+
+            .available.selected {
+                background-color: yellow !important;
+            }
+
+        .reserved {
+            background-color: red !important;
+        }
+    </style>
+}
+

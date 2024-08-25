@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LibBooking.Models.Librarian>
+
+<div class="navbar navbar-light bg-light justify-content-end">
+    <a class="nav-link" href="/Identity/Account/Login">
+        <i class="fas fa-user-circle fa-2x"></i> <!-- 使用 Font Awesome 图标 -->
+    </a>
+</div>
+
+<h2>Subject Librarians</h2>
+
+@foreach (var librarian in Model)
+{
+    <div class="librarian-info">
+        <img src="@librarian.ImageUrl" alt="@librarian.Name" />
+        <h3>@librarian.Name</h3>
+        <p>@librarian.Campus</p>
+        <p><a href="mailto:@librarian.Email">Email @librarian.Name</a></p>
+        <p><a href="@librarian.SubjectGuidesUrl">See Subject Guides</a></p>
+    </div>
+}
+
+<style>
+    .navbar {
+        padding-right: 20px; /* 根据需要调整 */
+    }
+
+    .librarian-info {
+        margin-bottom: 20px;
+    }
+
+    /* 适应不同屏幕大小的布局调整 */
+    .navbar a {
+        color: #333;
+    }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+</style>

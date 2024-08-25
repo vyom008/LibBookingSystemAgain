@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Library Room Booking - Initial Page";
+}
+
+<div class="container">
+    <h1>Welcome to the Library Room Booking System</h1>
+    <h2 class="text-success">Book a study room</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-8">
+           
+            <p>Bookable group study rooms are avaliable within our library from students from all faculties.<p/>
+           <h2 class="text-success" >Make a booking </h2>
+<table class="table table-bordered text-center">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Room</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Facilities</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Level 2, Learning commons, Meeting room 2 - glass slided</th>
+                <td>5</td>
+                <td>wifi, power, whiteboard, 5 computers, projector</td>
+            </tr>
+            <tr>
+                <th scope="row">Level 2, Learning commons, Meeting Room 3</th>
+                <td>16</td>
+                <td>wifi, power, whiteboard, 16 computers, projector</td>
+            </tr>
+            <tr>
+                <th scope="row">Level 2, Learning commons, Meeting Room 5, Student Connection Room</th>
+                <td>2</td>
+                <td>wifi, power, whiteboard, 2 computers</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <div class="col-md-10">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-success btn-md">Check Availability</a>
+        </div>
+
+        <hr>
+
+ <h2 class="text-success" >Condition of Use</h2>
+<p> Only current students are eligible to use the group study rooms<br>
+    Bookings are limited to a two-hour duration<br>
+    To cancel the booking you have made, Email us.</p>
+
+<h2 class="text-success" >Extend your booking</h2>
+<p>If there are no subsequent bookings, you may extend your session as long as you want. Please check the avaliablity and make another booking.</p> 
+
+
+    
+        <div class="col-md-16">
+            <h3 class="text-success">Contact the Librarians</h3>
+            <p>If you have any questions, please ontact our librarians.</p>
+            <a href="@Url.Action("Index", "Librarian")" class="btn btn-success btn-md">Librarian Info</a>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Include Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
