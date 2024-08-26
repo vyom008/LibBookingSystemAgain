@@ -19,10 +19,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container">
-@*                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="/images/Weltec Logo.png" style="width:60px" />
-                </a> *@
-                <a class="navbar-brand d-flex align-items-center" href="/">
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Initial">
                     <img src="/images/Weltec Logo.png" alt="Whitireia WelTec Logo" style="max-width: 100%; height: auto; max-height: 60px; vertical-align: middle;">
                 </a>
 
@@ -31,9 +28,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-@*                      <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li> *@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
                                 <i class="bi bi-house-fill"></i>
@@ -44,13 +38,18 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
-                          <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Book a consultation</a>
                         </li>
                         <!-- 添加一个登录链接 -->
-                        <li class="nav-item">
+@*                         <li class="nav-item">
                             <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
+                        </li> *@
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        </ul>
                     </ul>
                 </div>
             </div>
@@ -62,9 +61,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer bg-primary text-muted">
-        <div class="text-center text-white">
-            &copy; 2024 - <i class="bi bi-book-half" style="margin-left:auto margin-right: auto;"></i> - LibBooking - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer bg-primary text-muted" style="padding: 20px 0;">
+        <div class="text-center text-white" style="font-size: 1.2em;">
+            &copy; 2024 - <i class="bi bi-book-half" style="margin-left:auto; margin-right:auto;"></i> - LibBooking - <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color: #b3ff99;">Privacy</a>
         </div>
     </footer>
 
